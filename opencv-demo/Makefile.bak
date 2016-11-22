@@ -1,0 +1,13 @@
+CFLAGS=-g -Wall
+OPENCVLIB=-lopencv_core -lopencv_highgui -lopencv_imgproc
+OBJS=demo.cpp
+CXX=g++
+all: demo
+demo: $(OBJS)
+	$(CXX) $(CFLAGS) $(OPENCVLIB) -o $@ $(OBJS)
+run: demo
+	sudo rm /dev/video0
+	sudo ln -s /dev/video9 /dev/video0
+	DISPLAY=:0 ./demo
+clean:
+	rm -f demo
